@@ -3,7 +3,7 @@
 
     <string name="app_name">SDT Calculator</string>
     <string name="help">Help</string>
-    <string name="help_message">Just input any 2 values for Speed (or Pace), Distance and Time.\nThe input values are highlighted in blue while the output remains transparent.\n\nNote: the distance is in kilomenters.\n\nNote 2: the time has to be entered in this format xxh xxm xxs.</string>
+    <string name="help_message">Just input any two values from speed (or pace), distance or time.\n\nThe input values are highlighted in blue and the output remains transparent.\n\nDistances are in kilomenters.</string>
     <string name="ok">OK</string>
     <string name="world_records">World Records</string>
     <string name="start">Start</string>
