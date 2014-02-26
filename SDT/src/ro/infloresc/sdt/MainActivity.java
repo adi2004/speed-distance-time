@@ -11,20 +11,13 @@ import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 
-@SuppressLint("SetJavaScriptEnabled")
 public class MainActivity extends Activity {
-	WebView calculator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		calculator = (WebView) findViewById(R.id.webView1);
-		calculator.getSettings().setJavaScriptEnabled(true);
-
-		// calculator.setBackground(R.drawable.pracetrack);
-		calculator.loadUrl("file:///android_asset/calculator.htm");
-		calculator.setBackgroundColor(0);
+		//((EditText) findViewById(R.id.editDistance))
 	}
 
 	@Override
@@ -34,24 +27,10 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// Check if the key event was the Back button and if there's history
-		if ((keyCode == KeyEvent.KEYCODE_BACK) && calculator.canGoBack()) {
-			calculator.goBack();
-			return true;
-		}
-		// If it wasn't the Back key or there's no web page history, bubble up
-		// to the default
-		// system behavior (probably exit the activity)
-		return super.onKeyDown(keyCode, event);
-	}
-
 	public void loadWR(View v) {
-		calculator.loadUrl("file:///android_asset/wr.htm");
 	}
 
-	public void showHelp(View v) {
+	public void onPaceClick(View v) {
 		Builder helpMsg = new AlertDialog.Builder(this);
 		helpMsg.setTitle(R.string.help);
 		helpMsg.setMessage(R.string.help_message);
