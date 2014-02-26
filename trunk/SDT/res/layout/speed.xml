@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <ro.infloresc.sdt.VerticalTextView
+        android:id="@+id/ioSpeedLabel"
+        style="@style/IOLabel"
+        android:text="Input/Output" 
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/speedLabel"
+            style="@style/Label"
+            android:text="Speed:" />
+
+        <EditText
+            android:id="@+id/editSpeed"
+            style="@style/TextField"
+            android:ems="10"
+            android:hint="Enter speed"
+            android:inputType="numberDecimal|phone" />
+
+        <TextView
+            android:id="@+id/paceLabel"
+            style="@style/Label"
+            android:text="Pace: " />
+
+        <EditText
+            android:id="@+id/editPace"
+            style="@style/TextField"
+            android:ems="10"
+            android:hint="Enter pace"
+            android:inputType="time"
+            android:onClick="onPaceClick" />
+
+    </LinearLayout>
+
+</LinearLayout>
