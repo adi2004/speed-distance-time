@@ -10,5 +10,14 @@
     <string name="stop">Stop</string>
     <string name="pause">Pause</string>
     <string name="loop">Loop</string>
+    <string name="input_or_output">Input or Output</string>
+    <string name="distanceLabel">"Distance: "</string>
+    <string name="distanceHint">xx.xx km</string>
+    <string name="speedLabel">Speed:</string>
+    <string name="speedHint">km/h</string>
+    <string name="paceLabel">Pace:</string>
+    <string name="paceHint">m:ss</string>
+    <string name="timeLabel">Time:</string>
+    <string name="timeHint">h:mm:ss</string>
 
 </resources>

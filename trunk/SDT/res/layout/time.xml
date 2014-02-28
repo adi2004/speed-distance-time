@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="2dp" >
 
     <ro.infloresc.sdt.VerticalTextView
-        android:id="@+id/ioSpeedLabel"
+        android:id="@+id/ioTimeLabel"
         style="@style/IOLabel"
-        android:text="Input/Output" />
+        android:text="@string/input_or_output" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,14 +18,14 @@
         <TextView
             android:id="@+id/timeLabel"
             style="@style/Label"
-            android:text="Time: " />
+            android:text="@string/timeLabel" />
 
         <EditText
             android:id="@+id/editTime"
             style="@style/TextField"
             android:ems="10"
-            android:inputType="time" 
-            android:hint="Enter time"/>
+            android:hint="@string/timeHint"
+            android:inputType="time" />
     </LinearLayout>
 
 </LinearLayout>
