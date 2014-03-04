@@ -13,74 +13,13 @@ public class Calculator {
 	double time;
 	double pace;
 
-	public static void main(String[] args) {
-		Calculator c = new Calculator();
-		c.print();
-		c.onChange(IO.SPEED, 10.5f);
-		c.print();
-		c.onChange(IO.TIME, 10.5f);
-		c.print();
-		c.onChange(IO.SPEED, 10.5f);
-		c.print();
-		c.onChange(IO.DISTANCE, 10.5f);
-		c.print();
-		c.onChange(IO.TIME, .5f);
-		c.print();
-	}
-
-	private void print() {
-		switch (firstInput) {
-		case IO.SPEED:
-			System.out.print("Speed: " + speed);
-			switch (secondInput) {
-			case IO.DISTANCE:
-				System.out.println("; Distance: " + distance + "; Time: " + time);
-				break;
-			case IO.TIME:
-				System.out.println("; Time: " + time + "; Distance: " + distance);
-				break;
-			default:
-				System.out.println();
-			}
-			break;
-		case IO.DISTANCE:
-			System.out.print("Distance: " + distance);
-			switch (secondInput) {
-			case IO.SPEED:
-				System.out.println("; Speed: " + speed + "; Time: " + time);
-				break;
-			case IO.TIME:
-				System.out.println("; Time: " + time + "; Speed: " + speed);
-				break;
-			default:
-				System.out.println();
-			}
-			break;
-
-		case IO.TIME:
-			System.out.print("Time: " + time);
-			switch (secondInput) {
-			case IO.SPEED:
-				System.out.println("; Speed: " + speed + "; Distance: " + distance);
-				break;
-			case IO.DISTANCE:
-				System.out.println("; Distance: " + distance + "; Speed: " + speed);
-				break;
-			default:
-				System.out.println();
-			}
-			break;
-
-		case IO.NA:
-			System.out.println("No value entered yet;");
-			break;
-		}
-	}
-
 	public void onChange(int input, double nr) {
-		if (firstInput != input) {
+		int adjustedInput = input;
+		if (input == IO.PACE)
+			adjustedInput = IO.SPEED;
+		if (firstInput != adjustedInput) {
 			secondInput = firstInput;
-			firstInput = input;
+			firstInput = adjustedInput;
 		}
 		switch (input) {
 		case IO.SPEED:
@@ -91,9 +30,10 @@ public class Calculator {
 			if (secondInput == IO.TIME) {
 				output = IO.DISTANCE;
 				distance = speed * time;
-			} else if (secondInput == IO.DISTANCE && speed != 0) {
+			} else if (secondInput == IO.DISTANCE) {
 				output = IO.TIME;
-				time = distance / speed;
+				if (speed != 0)
+					time = distance / speed;
 			}
 			break;
 		case IO.PACE:
@@ -104,19 +44,22 @@ public class Calculator {
 			if (secondInput == IO.TIME) {
 				output = IO.DISTANCE;
 				distance = speed * time;
-			} else if (secondInput == IO.DISTANCE && speed != 0) {
+			} else if (secondInput == IO.DISTANCE) {
 				output = IO.TIME;
-				time = distance / speed;
+				if (speed != 0)
+					time = distance / speed;
 			}
 			break;
 		case IO.DISTANCE:
 			distance = nr;
-			if (secondInput == IO.SPEED && speed != 0) {
+			if (secondInput == IO.SPEED) {
 				output = IO.TIME;
-				time = distance / speed;
-			} else if (secondInput == IO.TIME && time != 0) {
+				if (speed != 0)
+					time = distance / speed;
+			} else if (secondInput == IO.TIME) {
 				output = IO.SPEED;
-				speed = distance / time;
+				if (speed != 0)
+					speed = distance / time;
 				pace = 1 / speed;
 			}
 			break;
@@ -125,9 +68,10 @@ public class Calculator {
 			if (secondInput == IO.SPEED) {
 				output = IO.DISTANCE;
 				distance = speed * time;
-			} else if (secondInput == IO.DISTANCE && time != 0) {
+			} else if (secondInput == IO.DISTANCE) {
 				output = IO.SPEED;
-				speed = distance / time;
+				if (time != 0)
+					speed = distance / time;
 				pace = 1 / speed;
 			}
 			break;
@@ -163,7 +107,6 @@ public class Calculator {
 	}
 
 	private double parseTime(String stringNr) {
-		double parsedTime = 0;
 		String regularExpression = ":";
 		String[] pace = stringNr.split(regularExpression);
 		int length = pace.length;
@@ -176,8 +119,7 @@ public class Calculator {
 			} catch (Exception e) {
 			}
 		}
-		parsedTime = seconds / 3600.;
-		return parsedTime;
+		return seconds / 3600.;
 	}
 
 	private int exp(int base, int exp) {
