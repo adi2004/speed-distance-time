@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale")
 public class Calculator {
-	private static double ZERO = 0.0001;
 	public int firstInput;
 	public int secondInput;
 	public int output;
@@ -15,6 +14,7 @@ public class Calculator {
 	double pace;
 
 	public void onChange(int input, double nr) {
+		// TODO: this needs some refactoring...
 		int adjustedInput = input;
 		if (input == IO.PACE)
 			adjustedInput = IO.SPEED;
@@ -63,6 +63,12 @@ public class Calculator {
 					speed = distance / time;
 					if (speed > 0)
 						pace = 1 / speed;
+					else
+						pace = 0;
+				}
+				else {
+					speed = 0;
+					pace = 0;
 				}
 			}
 			break;
@@ -77,6 +83,12 @@ public class Calculator {
 					speed = distance / time;
 					if (speed > 0)
 						pace = 1 / speed;
+					else
+						pace = 0;
+				}
+				else {
+					speed = 0;
+					pace = 0;
 				}
 			}
 			break;
@@ -117,10 +129,10 @@ public class Calculator {
 		int length = pace.length;
 		if (length > 3)
 			return 0;
-		int seconds = 0;
+		double seconds = 0;
 		for (int idx = 0; idx < length; idx++) {
 			try {
-				seconds += Integer.parseInt(pace[idx]) * exp(60, length - idx - 1);
+				seconds += Double.parseDouble(pace[idx]) * exp(60, length - idx - 1);
 			} catch (Exception e) {
 			}
 		}
