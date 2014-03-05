@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale")
 public class Calculator {
+	private static double ZERO = 0.0001;
 	public int firstInput;
 	public int secondInput;
 	public int output;
@@ -25,28 +26,28 @@ public class Calculator {
 		case IO.SPEED:
 			speed = nr;
 			pace = 0;
-			if (speed != 0)
+			if (speed > 0)
 				pace = 1 / speed;
 			if (secondInput == IO.TIME) {
 				output = IO.DISTANCE;
 				distance = speed * time;
 			} else if (secondInput == IO.DISTANCE) {
 				output = IO.TIME;
-				if (speed != 0)
+				if (speed > 0)
 					time = distance / speed;
 			}
 			break;
 		case IO.PACE:
 			pace = nr;
 			speed = 0;
-			if (pace != 0)
+			if (pace > 0)
 				speed = 1 / pace;
 			if (secondInput == IO.TIME) {
 				output = IO.DISTANCE;
 				distance = speed * time;
 			} else if (secondInput == IO.DISTANCE) {
 				output = IO.TIME;
-				if (speed != 0)
+				if (speed > 0)
 					time = distance / speed;
 			}
 			break;
@@ -54,13 +55,15 @@ public class Calculator {
 			distance = nr;
 			if (secondInput == IO.SPEED) {
 				output = IO.TIME;
-				if (speed != 0)
+				if (speed > 0)
 					time = distance / speed;
 			} else if (secondInput == IO.TIME) {
 				output = IO.SPEED;
-				if (speed != 0)
+				if (time > 0) {
 					speed = distance / time;
-				pace = 1 / speed;
+					if (speed > 0)
+						pace = 1 / speed;
+				}
 			}
 			break;
 		case IO.TIME:
@@ -70,9 +73,11 @@ public class Calculator {
 				distance = speed * time;
 			} else if (secondInput == IO.DISTANCE) {
 				output = IO.SPEED;
-				if (time != 0)
+				if (time > 0) {
 					speed = distance / time;
-				pace = 1 / speed;
+					if (speed > 0)
+						pace = 1 / speed;
+				}
 			}
 			break;
 		}
