@@ -1,85 +1,0 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-
-    <style name="TextField">
-        <item name="android:background">#4f212121</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:textSize">56sp</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:textColor">#ffACD311</item>
-        <item name="android:textScaleX">.9</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="Label">
-        <item name="android:background">#8f8f8f8f</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:typeface">monospace</item>
-        <item name="android:textScaleX">2.0</item>
-        <item name="android:shadowRadius">3</item>
-        <item name="android:shadowColor">#ff000000</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">#ffffffff</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-    </style>
-
-    <style name="InputLabel">
-        <item name="android:background">#ffE87CA9</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:typeface">monospace</item>
-        <item name="android:textScaleX">2.0</item>
-        <item name="android:shadowRadius">3</item>
-        <item name="android:shadowColor">#ff000000</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">#ff7CE8BB</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-    </style>
-
-    <style name="OutputLabel">
-        <item name="android:background">#ffBBE87C</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:typeface">monospace</item>
-        <item name="android:textScaleX">2.0</item>
-        <item name="android:shadowRadius">3</item>
-        <item name="android:shadowColor">#ff000000</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">#ffFFC9FE</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-    </style>
-
-    <style name="IOLabel">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <!-- <item name="android:background"></item> -->
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">bottom</item>
-        <item name="android:textSize">8sp</item>
-        <item name="android:typeface">monospace</item>
-        <!-- <item name="android:textScaleX">2.0</item> -->
-        <item name="android:shadowRadius">3</item>
-        <item name="android:shadowColor">#ff000000</item>
-        <item name="android:textColor">#ffffffff</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-    </style>
-
-</resources>
