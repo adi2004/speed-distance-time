@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SDT Calculator</string>
+    <string name="help">Help</string>
+    <string name="help_message">Just input any two values from speed (or pace), distance or time.\n\nThe input values are highlighted in blue and the output remains transparent.\n\nDistances are in kilomenters.</string>
+    <string name="ok">OK</string>
+    <string name="world_records">World Records</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
+    <string name="loop">Loop</string>
+
+</resources>

@@ -1,0 +1,289 @@
+
+<!-- saved from url=(0024)http://infloresc.ro/sdt/ -->
+<html><!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/ItadiVod/11/edit
+--><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta name="description" content="calculator">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+<style id="jsbin-css">
+body {
+  padding: 0;
+  margin: 0;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+  
+  background: transparent;
+  color: #000000; 
+  
+  font-family: 'Doppio One', sans-serif; 
+  text-shadow: 0px 0px 10px rgba(255,255,255,.3); 
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { 
+  text-align: center; 
+}
+
+input {
+  width:100%; 
+  height:40px;
+  font-size:24px;
+  border-radius: 5px;
+}
+
+button {
+  width:50px;
+  text-align:center;
+}
+
+table {
+  width:100%;
+}
+
+
+</style>
+<style type="text/css"></style></head>
+    
+    <body>
+        <table>
+            <tbody><tr id="speeddiv">
+                <td align="right">Speed:</td>
+                <td align="left">
+                    <input id="speed" type="text" onkeyup="onSpeedChange()" onchange="onSpeedChange()" onclick="onSpeedChange()">
+                </td>
+                <td align="right">
+                    <button onclick="setSpeed(10);">10</button>
+                    <button onclick="setSpeed(12);">12</button>
+                    <button onclick="setSpeed(15);">15</button>
+                    <button onclick="setSpeed(20);">20</button>
+                </td>
+            </tr>
+            <tr id="pacediv">
+                <td align="right">Pace:</td>
+                <td align="left">
+                    <input id="pace" type="text" onkeyup="onPaceChange()" onclick="onPaceChange()">
+                </td>
+                <td align="right">
+                    <button onclick="setPace(&#39;3m 0s&#39;);">3m</button>
+                    <button onclick="setPace(&#39;4m 0s&#39;);">4m</button>
+                    <button onclick="setPace(&#39;5m 0s&#39;);">5m</button>
+                    <button onclick="setPace(&#39;6m 0s&#39;);">6m</button>
+                </td>
+            </tr>
+            <tr id="distancediv">
+                <td align="right">Distance:</td>
+                <td align="left">
+                    <input id="dist" type="text" onkeyup="onDistanceChange()" onchange="onDistanceChange()" onclick="onDistanceChange()">
+                </td>
+                <td align="right">
+                    <button onclick="setDistance(5);">5K</button>
+                    <button onclick="setDistance(10);">10K</button>
+                    <button onclick="setDistance(21.0975);">half</button>
+                    <button onclick="setDistance(42.195);">marathon</button>
+                </td>
+            </tr>
+            <tr id="timediv">
+                <td align="right">Time:</td>
+                <td align="left">
+                    <input id="time" type="text" onkeyup="onTimeChange()" onclick="onTimeChange()">
+                </td>
+                <td align="right">
+                    <button onclick="setTime(&#39;3h 0m 0s&#39;);">3h</button>
+                    <button onclick="setTime(&#39;2h 0m 0s&#39;);">2h</button>
+                    <button onclick="setTime(&#39;1h 0m 0s&#39;);">1h</button>
+                    <button onclick="setTime(&#39;0h 30m 0s&#39;);">30m</button>
+                </td>
+            </tr>
+        </tbody></table>
+    <script>
+var speedv;
+var timev;
+var distancev;
+var pacev;
+
+var inputQueue = [];
+
+function setInput(input)
+{
+  //by convention:
+  // 1 is speed
+  // 2 is distance
+  // 3 is time
+  
+  if (inputQueue[0] !== input && inputQueue[1] !== input)
+  {
+    // check if the queue is full
+    if (inputQueue.length > 1)
+    {
+      setBackgroundColor(inputQueue[0], "transparent");
+      inputQueue.shift();
+    }
+    
+    inputQueue.push(input);
+    setBackgroundColor(input, "#4FB8D6");
+  }
+}
+
+function setBackgroundColor(element, color)
+{
+  if (element === 1) 
+  {
+    document.getElementById("speeddiv").style.backgroundColor = color;
+    document.getElementById("pacediv").style.backgroundColor = color;
+  }
+  if (element === 2) document.getElementById("distancediv").style.backgroundColor = color;
+  if (element === 3) document.getElementById("timediv").style.backgroundColor = color;  
+}
+
+function onSpeedChange()
+{
+  getSpeed();
+  updatePace( Math.floor((1/speedv)*60) + "m " + Math.round((1/speedv)*3600%60) + "s" );
+  setInput(1);
+  calculate();
+}
+
+function onPaceChange()
+{
+  getPace();
+  updateSpeed( (1/(pacev.getUTCHours() + pacev.getUTCMinutes() / 60 + pacev.getUTCSeconds() / 3600)).toFixed(2) );
+  setInput(1);
+  calculate();
+}
+
+function onDistanceChange()
+{
+  getDistance();
+  setInput(2);
+  calculate();
+}
+
+function onTimeChange()
+{
+  getTime();
+  setInput(3);
+  calculate();
+}
+
+function getSpeed()
+{
+  speedv=document.getElementById("speed").value;
+}
+
+function getPace()
+{
+  str = document.getElementById("pace").value;
+  pacev = parseTime(str);
+}
+
+function getDistance()
+{
+  distancev = document.getElementById("dist").value;
+}
+
+function getTime()
+{
+  str = document.getElementById("time").value;
+  timev = parseTime(str);
+}
+
+function parseTime(str)
+{
+  time = new Date(0);
+
+  match = str.match(/\d*(?=h)/g);
+  if (match !== null)
+    time.setUTCHours( match[0] );
+  match = str.match(/\d*(?=m)/g);
+  if (match !== null)
+    time.setUTCMinutes( match[0] );
+  match = str.match(/\d*(?=s)/g);
+  if (match !== null)
+    time.setUTCSeconds( match[0] );
+  
+  return time;
+}
+
+function updateSpeed(speed)
+{
+  document.getElementById("speed").value = speed;
+  speedv = speed;
+}
+
+function updatePace(pace)
+{
+  document.getElementById("pace").value = pace;
+}
+
+function updateDistance(distance)
+{
+  document.getElementById("dist").value = distance;
+}
+
+function updateTime(time)
+{
+  document.getElementById("time").value = time;
+}
+
+function setSpeed(speed)
+{
+  updateSpeed(speed);
+  onSpeedChange();
+}
+
+function setPace(pace)
+{
+  updatePace(pace);
+  onPaceChange();
+}
+
+function setDistance(distance)
+{
+  updateDistance(distance);
+  onDistanceChange();
+}
+
+function setTime(time)
+{
+  updateTime(time);
+  onTimeChange();
+}
+
+function calculate()
+{
+  if (inputQueue.length < 2) return;
+  // one of the inputs is the speed
+  if (inputQueue[0] === 1 || inputQueue[1] === 1)
+  {
+    // the second input is the distance
+    if (inputQueue[0] === 2 || inputQueue[1] === 2)
+    {
+      timev = new Date( (distancev / speedv) * 1000 * 60 * 60 );
+      updateTime( timev.getUTCHours() + "h " + timev.getUTCMinutes() + "m " + timev.getUTCSeconds() + "s" );
+      return;
+    }
+    
+    // the second input is the time
+    if (inputQueue[0] === 3 || inputQueue[1] === 3)
+    {
+      timeh = timev.getUTCHours() + timev.getUTCMinutes()/60 + timev.getUTCSeconds()/3600;
+      updateDistance( (speedv * timeh).toFixed(2) );
+      return;
+    }
+  }
+  
+  // one of the inputs is the distance and the other is the time
+  if ((inputQueue[0] === 2 || inputQueue[1] === 2) && (inputQueue[0] === 3 || inputQueue[1] === 3))
+  {
+    updateSpeed( (distancev/(timev.getUTCHours() + timev.getUTCMinutes() / 60 + timev.getUTCSeconds() / 3600)).toFixed(2) );
+    updatePace( Math.floor((1/speedv)*60) + "m " + Math.round((1/speedv)*3600%60) + "s" );
+  }
+}
+</script>
+
+
+</body></html>
