@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Calculator de VDT</string>
+    <string name="help">Ajutor</string>
+    <string name="input_or_output">Intrare sau ieșire</string>
+    <string name="distanceLabel">Distanță:</string>
+    <string name="distanceHint">xx.xx km</string>
+    <string name="speedLabel">Viteză:</string>
+    <string name="speedHint">km/h</string>
+    <string name="paceLabel">Ritm:</string>
+    <string name="paceHint">m:ss</string>
+    <string name="timeLabel">Timp:</string>
+    <string name="timeHint">h:mm:ss</string>
+    <string name="inputText">Intrare</string>
+    <string name="outputText">Ieșire</string>
+</resources>

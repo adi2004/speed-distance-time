@@ -14,85 +14,70 @@ public class Calculator {
 	double pace;
 
 	public void onChange(int input, double nr) {
-		// TODO: this needs some refactoring...
-		int adjustedInput = input;
-		if (input == IO.PACE)
-			adjustedInput = IO.SPEED;
-		if (firstInput != adjustedInput) {
+		if (firstInput != input) {
 			secondInput = firstInput;
-			firstInput = adjustedInput;
+			firstInput = (input == IO.PACE)?IO.SPEED:input;
 		}
 		switch (input) {
 		case IO.SPEED:
 			speed = nr;
-			pace = 0;
-			if (speed > 0)
-				pace = 1 / speed;
+			setPace();
 			if (secondInput == IO.TIME) {
-				output = IO.DISTANCE;
-				distance = speed * time;
+				calculateDistance();
 			} else if (secondInput == IO.DISTANCE) {
-				output = IO.TIME;
-				if (speed > 0)
-					time = distance / speed;
+				calculateTime();
 			}
 			break;
 		case IO.PACE:
 			pace = nr;
-			speed = 0;
-			if (pace > 0)
-				speed = 1 / pace;
+			setSpeed();
 			if (secondInput == IO.TIME) {
-				output = IO.DISTANCE;
-				distance = speed * time;
+				calculateDistance();
 			} else if (secondInput == IO.DISTANCE) {
-				output = IO.TIME;
-				if (speed > 0)
-					time = distance / speed;
+				calculateTime();
 			}
 			break;
 		case IO.DISTANCE:
 			distance = nr;
 			if (secondInput == IO.SPEED) {
-				output = IO.TIME;
-				if (speed > 0)
-					time = distance / speed;
+				calculateTime();
 			} else if (secondInput == IO.TIME) {
-				output = IO.SPEED;
-				if (time > 0) {
-					speed = distance / time;
-					if (speed > 0)
-						pace = 1 / speed;
-					else
-						pace = 0;
-				}
-				else {
-					speed = 0;
-					pace = 0;
-				}
+				calculateSpeed();
 			}
 			break;
 		case IO.TIME:
 			time = nr;
 			if (secondInput == IO.SPEED) {
-				output = IO.DISTANCE;
-				distance = speed * time;
+				calculateDistance();
 			} else if (secondInput == IO.DISTANCE) {
-				output = IO.SPEED;
-				if (time > 0) {
-					speed = distance / time;
-					if (speed > 0)
-						pace = 1 / speed;
-					else
-						pace = 0;
-				}
-				else {
-					speed = 0;
-					pace = 0;
-				}
+				calculateSpeed();
 			}
 			break;
 		}
+	}
+
+	private void calculateSpeed() {
+		output = IO.SPEED;
+		speed = (time > 0) ? distance / time : 0;
+		setPace();
+	}
+
+	private void calculateTime() {
+		output = IO.TIME;
+		time = (speed > 0) ? distance / speed : 0;
+	}
+
+	private void calculateDistance() {
+		output = IO.DISTANCE;
+		distance = speed * time;
+	}
+
+	private void setSpeed() {
+		speed = (pace > 0) ? 1 / pace : 0;
+	}
+
+	private void setPace() {
+		pace = (speed > 0) ? 1 / speed : 0;
 	}
 
 	public void onChange(int input, String stringNr) {

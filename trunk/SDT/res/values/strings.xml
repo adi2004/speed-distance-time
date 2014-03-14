@@ -2,16 +2,8 @@
 <resources>
 
     <string name="app_name">SDT Calculator</string>
-    <string name="help">Help</string>
-    <string name="help_message">Just input any two values from speed (or pace), distance or time.\n\nThe input values are highlighted in blue and the output remains transparent.\n\nDistances are in kilomenters.</string>
-    <string name="ok">OK</string>
-    <string name="world_records">World Records</string>
-    <string name="start">Start</string>
-    <string name="stop">Stop</string>
-    <string name="pause">Pause</string>
-    <string name="loop">Loop</string>
     <string name="input_or_output">Input or Output</string>
-    <string name="distanceLabel">"Distance: "</string>
+    <string name="distanceLabel">Distance:</string>
     <string name="distanceHint">xx.xx km</string>
     <string name="speedLabel">Speed:</string>
     <string name="speedHint">km/h</string>
@@ -19,5 +11,7 @@
     <string name="paceHint">m:ss</string>
     <string name="timeLabel">Time:</string>
     <string name="timeHint">h:mm:ss</string>
+    <string name="inputText">Input</string>
+    <string name="outputText">Output</string>
 
 </resources>
